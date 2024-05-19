@@ -1,66 +1,5 @@
-#ifdef DEBUG
-
 #include <iostream>
-using namespace std;
-
-class SeqStack {
-public:
-	void init(int size = 10) {
-		_pstack = new int[size];
-		_top = -1;
-		_size = size;
-	}
-	void release() {
-		delete[] _pstack;
-		_pstack = nullptr;
-	}
-	void push(int val) {
-		if (full()) 
-			resize();
-		_pstack[++_top] = val;
-	}
-	void pop() {
-		if (empty())
-			return;
-		--_top;
-	}
-	int top() {
-		return _pstack[_top];
-	}
-	bool empty(){ return _top == -1; }
-	bool full() { return _top == _size - 1; }
-private:
-	int* _pstack;//¿ª±Ù¶¯Ì¬Êı×é£¬´æ´¢Ë³ĞòÕ»µÄÔªËØ
-	int _top;//Ö¸ÏòÕ»¶¥ÔªËØµÄÎ»ÖÃ
-	int _size;//Êı×éÀ©ÈİµÄ×Ü´óĞ¡
-
-	void resize() {
-		int* ptmp = new int[_size * 2];
-		for (int i = 0; i < _size; ++i) {
-			ptmp[i] = _pstack[i];
-		}
-		delete[] _pstack;
-		_size *= 2;
-	}
-};
-
-int main() {
-	SeqStack s;
-	s.init(5);
-
-	for (int i = 0; i < 15; ++i) {
-		s.push(rand() % 100); 
-	}
-	while (!s.empty()) {
-		cout << s.top() << " ";
-		s.pop();
-	}
-	return 0;
-}
-#endif // DEBUG
-
-#include <iostream>
-#include <cstdlib> // ÎªÁËÊ¹ÓÃ rand() º¯Êı
+#include <cstdlib> // ä¸ºäº†ä½¿ç”¨ rand() å‡½æ•°
 using namespace std;
 
 class SeqStack {
@@ -93,9 +32,9 @@ public:
     bool empty() { return _top == -1; }
     bool full() { return _top == _size - 1; }
 private:
-    int* _pstack; // ¿ª±Ù¶¯Ì¬Êı×é£¬´æ´¢Ë³ĞòÕ»µÄÔªËØ
-    int _top;     // Ö¸ÏòÕ»¶¥ÔªËØµÄÎ»ÖÃ
-    int _size;    // Êı×éÀ©ÈİµÄ×Ü´óĞ¡
+    int* _pstack; // å¼€è¾ŸåŠ¨æ€æ•°ç»„ï¼Œå­˜å‚¨é¡ºåºæ ˆçš„å…ƒç´ 
+    int _top;     // æŒ‡å‘æ ˆé¡¶å…ƒç´ çš„ä½ç½®
+    int _size;    // æ•°ç»„æ‰©å®¹çš„æ€»å¤§å°
 
     void resize() {
         int* ptmp = new int[_size * 2];
