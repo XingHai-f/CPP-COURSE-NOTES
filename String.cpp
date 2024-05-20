@@ -1,55 +1,59 @@
 #include <iostream>
+#include <cstring> // ä½¿ç”¨cstringåº“ä¸­çš„strlenå’Œstrcpyå‡½æ•°
 using namespace std;
 
 class String {
 public:
-	String(const char* str = nullptr) { // ÆÕÍ¨¹¹Ôìº¯Êı
-		if (str != nullptr) {
-			m_data = new char[strlen(str) + 1];
-			strcpy(this->m_data, str);
-		}
-		else {
-			m_data = new char[1];
-			*m_data = '\0';
-		}
-	}
+    // æ™®é€šæ„é€ å‡½æ•°
+    String(const char* str = nullptr) {
+        if (str != nullptr) {
+            m_data = new char[strlen(str) + 1];
+            strcpy(m_data, str);
+        } else {
+            m_data = new char[1];
+            *m_data = '\0';
+        }
+    }
 
-	String(const String& other) { // ¿½±´¹¹Ôìº¯Êı
-		m_data = new char[strlen(other.m_data) + 1];
-		strcpy(m_data, other.m_data);
-	}
+    // æ‹·è´æ„é€ å‡½æ•°
+    String(const String& other) {
+        m_data = new char[strlen(other.m_data) + 1];
+        strcpy(m_data, other.m_data);
+    }
 
-	~String(void) { // Îö¹¹º¯Êı
-		delete[]m_data;
-		m_data = nullptr;
-	}
+    // ææ„å‡½æ•°
+    ~String() {
+        delete[] m_data;
+        m_data = nullptr;
+    }
 
-	String& operator=(const String& other) { // ¸³ÖµÖØÔØº¯Êı
-		if (this == &other) {
-			return *this;
-		}
-		delete[]m_data;
-		m_data = new char[strlen(other.m_data) + 1];
-		strcpy(m_data, other.m_data);
-		return *this;
-	}
+    // èµ‹å€¼é‡è½½å‡½æ•°
+    String& operator=(const String& other) {
+        if (this != &other) {
+            char* new_data = new char[strlen(other.m_data) + 1];
+            strcpy(new_data, other.m_data);
+            delete[] m_data;
+            m_data = new_data;
+        }
+        return *this;
+    }
 
 private:
-	char *m_data; // ÓÃÓÚ±£´æ×Ö·û´®
+    char* m_data; // ç”¨äºä¿å­˜å­—ç¬¦ä¸²
 };
 
 int main() {
-	//µ÷ÓÃ´øconst char*²ÎÊıµÄ¹¹Ôìº¯Êı
-	String str1;
-	String str2("hello");
-	String str3 = "world";
+    // è°ƒç”¨å¸¦const char*å‚æ•°çš„æ„é€ å‡½æ•°
+    String str1;
+    String str2("hello");
+    String str3 = "world";
 
-	//µ÷ÓÃ¿½±´¹¹Ôìº¯Êı
-	String str4 = str3;
-	String str5(str3);
+    // è°ƒç”¨æ‹·è´æ„é€ å‡½æ•°
+    String str4 = str3;
+    String str5(str3);
 
-	//µ÷ÓÃ¸³ÖµÖØÔØº¯Êı
-	str3 = str1 = str2;
+    // è°ƒç”¨èµ‹å€¼é‡è½½å‡½æ•°
+    str3 = str1 = str2;
 
-	return 0;
+    return 0;
 }
