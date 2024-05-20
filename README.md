@@ -1,3 +1,3 @@
-# 顺序栈/Sequential Stack
-这是使用OOP思想实现一个顺序栈的C++程序
-This is a C++ program that uses OOP ideas to implement a sequential stack.
+# C++课程学习
+Seq_stack.cpp：使用OOP编程思想实现顺序栈
+String.cpp:自定义拷贝构造函数和赋值重载函数
