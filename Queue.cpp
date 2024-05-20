@@ -14,22 +14,22 @@ public:
 		_pQue = nullptr;
 	}
 
-	//Èë¶Ó²Ù×÷
+	//å…¥é˜Ÿæ“ä½œ
 	void push(int val) {
 		if (full())
 			resize();
 		_pQue[_rear] = val;
-		_rear = (_rear + 1) % _size;
+		_rear = (_rear + 1) % _size; // ä½¿ç”¨æ¨¡è¿ç®—å®ç°ç¯å½¢é˜Ÿåˆ—
 	}
 
-	//³ö¶Ó²Ù×÷
+	//å‡ºé˜Ÿæ“ä½œ
 	void pop() {
 		if (empty())
 			return;
 		_front = (_front + 1) % _size;
 	}
 
-	//»ñÈ¡¶ÓÍ·ÔªËØ
+	//è·å–é˜Ÿå¤´å…ƒç´ 
 	int top() {
 		return _pQue[_front];
 	}
@@ -38,10 +38,10 @@ public:
 	bool empty() { return _front == _rear; }
 
 private:
-	int* _pQue; //ÉêÇë¶ÓÁĞµÄÊı×é¿Õ¼ä
-	int _front; //Ö¸Ê¾¶ÓÍ·µÄÎ»ÖÃ
-	int _rear;  //Ö¸Ê¾¶ÓÎ²µÄÎ»ÖÃ
-	int _size;  //¶ÓÁĞÀ©ÈİµÄ×Ü´óĞ¡
+	int* _pQue; //ç”³è¯·é˜Ÿåˆ—çš„æ•°ç»„ç©ºé—´
+	int _front; //æŒ‡ç¤ºé˜Ÿå¤´çš„ä½ç½®
+	int _rear;  //æŒ‡ç¤ºé˜Ÿå°¾çš„ä½ç½®
+	int _size;  //é˜Ÿåˆ—æ‰©å®¹çš„æ€»å¤§å°
 
 	void resize() {
 		int* ptmp = new int[2 * _size];
