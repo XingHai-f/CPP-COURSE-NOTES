@@ -2,105 +2,97 @@
 #include <cstdlib>
 using namespace std;
 
-//ÀàÄ£°å
-template <typename T> 
-class SeqStack //Ä£°åÃû³Æ + ÀàĞÍ²ÎÊıÁĞ±í = ÀàÃû³Æ 
-{ 
-public:
-	//¹¹ÔìºÍÎö¹¹º¯Êı²»ÓÃÀàĞÍ²ÎÊıÁĞ±í(<T>),ÆäËüĞèÒª
-	SeqStack(int size = 10)
-		:_pstack(new T[size])
-		, _top(0)
-		, _size(size)
-	{}
-	~SeqStack()
-	{
-		delete[]_pstack;
-		_pstack = nullptr;
-
-	}
-	SeqStack(const SeqStack<T>& stack)
-		:_top(stack._top)
-		:_size(stack._size)
-	{
-		_pstack = new T[_size];
-		//²»ÒªÓÃmemcpy½øĞĞ¿½±´
-		for (int i = 0; i < _top; ++i)
-		{
-			_pstack[i] = stack._pstack[i];
-		}
-	}
-	SeqStack<T>& operator=(const SeqStack<T>& stack)
-	{
-		if (this == &stack) 
-			return *this;
-		delete[]_pstack;
-		_top = stack._top;
-		_size = stack._size;
-		_pstack = new T[_size];
-		for (int i = 0; i < _top; ++i)
-		{
-			_pstack[i] = stack._pstack[i];
-		}
-		return *this;
-	}
-
-	void push(const T& val) // ÈëÕ»²Ù×÷
-	{
-		if (full())
-			expand();
-		_pstack[_top++] = val;
-	}
-
-	void pop() // ³öÕ»²Ù×÷
-	{
-		if (empty())
-			return;
-		--_top;
-	}
-
-	T top()const // ·µ»ØÕ»¶¥ÔªËØ
-	{
-		if (empty())
-			throw"stack is empty."; //Å×Òì³£Ò²´ú±íº¯ÊıÂß¼­½áÊø
-		return _pstack[_top - 1];
-	}
-	bool full()const { return _top == _size; } // Õ»Âú
-	bool empty()const { return _top == 0; } // Õ»¿Õ
-private:
-	T* _pstack;
-	int _top;
-	int _size;
-
-	//Ë³ĞòÕ»µ×²ãÊı×é°´2±¶µÄ·½Ê½À©Èİ
-	void expand()
-	{
-		T* ptmp = new T[_size * 2];
-		for (int i = 0; i < _top; ++i)
-		{
-			ptmp[i] = _pstack[i];
-		}
-		delete[] _pstack;
-		_pstack = ptmp;
-		_size *= 2;
-	}
-};
+//ç±»æ¨¡æ¿
 template <typename T>
-void SeqStack<T> ::push(const T& val) // ÈëÕ»²Ù×÷
+class SeqStack //æ¨¡æ¿åç§° + ç±»å‹å‚æ•°åˆ—è¡¨ = ç±»åç§° 
 {
-	if (full())
-		expand();
-	_pstack[_top++] = val;
-}
+public:
+    //æ„é€ å’Œææ„å‡½æ•°ä¸ç”¨ç±»å‹å‚æ•°åˆ—è¡¨(<T>),å…¶å®ƒéœ€è¦
+    SeqStack(int size = 10)
+        :_pstack(new T[size])
+        , _top(0)
+        , _size(size)
+    {}
+    ~SeqStack()
+    {
+        delete[] _pstack;
+        _pstack = nullptr;  // é”™è¯¯: nullptr æ‹¼å†™é”™è¯¯
+    }
+    SeqStack(const SeqStack<T>& stack)
+        :_top(stack._top)
+        , _size(stack._size)
+    {
+        _pstack = new T[_size];
+        //ä¸è¦ç”¨memcpyè¿›è¡Œæ‹·è´
+        for (int i = 0; i < _top; ++i)
+        {
+            _pstack[i] = stack._pstack[i];
+        }
+    }
+    SeqStack<T>& operator=(const SeqStack<T>& stack)
+    {
+        if (this == &stack)
+            return *this;
+        delete[] _pstack;
+        _top = stack._top;  // é”™è¯¯: _top è¢«å†™æˆ _stack
+        _size = stack._size;
+        _pstack = new T[_size];
+        for (int i = 0; i < _top; ++i)
+        {
+            _pstack[i] = stack._pstack[i];
+        }
+        return *this;
+    }
+
+    void push(const T& val) // å…¥æ ˆæ“ä½œ
+    {
+        if (full())
+            expand();
+        _pstack[_top++] = val;
+    }
+
+    void pop() // å‡ºæ ˆæ“ä½œ
+    {
+        if (empty())
+            return;
+        --_top;
+    }
+
+    T top()const // è¿”å›æ ˆé¡¶å…ƒç´ 
+    {
+        if (empty())
+            throw "stack is empty."; //æŠ›å¼‚å¸¸ä¹Ÿä»£è¡¨å‡½æ•°é€»è¾‘ç»“æŸ
+        return _pstack[_top - 1];
+    }
+    bool full()const { return _top == _size; } // æ ˆæ»¡
+    bool empty()const { return _top == 0; } // æ ˆç©º
+private:
+    T* _pstack;
+    int _top;
+    int _size;
+
+    //é¡ºåºæ ˆåº•å±‚æ•°ç»„æŒ‰2å€çš„æ–¹å¼æ‰©å®¹
+    void expand()
+    {
+        T* ptmp = new T[_size * 2];
+        for (int i = 0; i < _top; ++i)
+        {
+            ptmp[i] = _pstack[i];
+        }
+        delete[] _pstack;
+        _pstack = ptmp;
+        _size *= 2;
+    }
+};
 
 int main()
 {
-	SeqStack<int> s1;
-	s1.push(20);
-	s1.push(80);
-	s1.push(78);
-	s1.pop();
-	cout << s1.top() << endl;
-	return 0;
+    SeqStack<int> s1;
+    s1.push(20);
+    s1.push(80);
+    s1.push(78);
+    s1.pop();
+    cout << s1.top() << endl;
+    return 0;
 }
 
