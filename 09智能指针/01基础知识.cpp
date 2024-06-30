@@ -2,9 +2,9 @@
 #include <memory>
 using namespace std;
 
-// ÖÇÄÜÖ¸Õë ±£Ö¤ÄÜ×öµ½×ÊÔ´µÄ×Ô¶¯ÊÍ·Å
-// ÀûÓÃÕ»ÉÏµÄ¶ÔÏó³ö×÷ÓÃÓò×Ô¶¯Îö¹¹µÄÌØÕ÷£¬À´×öµ½×ÊÔ´µÄ×Ô¶¯ÊÍ·ÅµÄ
-// CSmartPtr<int> *p = new CSmartPtr<int>(new int); delete p;ÂãÖ¸Õë
+// æ™ºèƒ½æŒ‡é’ˆ ä¿è¯èƒ½åšåˆ°èµ„æºçš„è‡ªåŠ¨é‡Šæ”¾
+// åˆ©ç”¨æ ˆä¸Šçš„å¯¹è±¡å‡ºä½œç”¨åŸŸè‡ªåŠ¨ææ„çš„ç‰¹å¾ï¼Œæ¥åšåˆ°èµ„æºçš„è‡ªåŠ¨é‡Šæ”¾çš„
+// CSmartPtr<int> *p = new CSmartPtr<int>(new int); delete p;è£¸æŒ‡é’ˆ
 template<typename T>
 class CSmartPtr
 {
@@ -27,28 +27,28 @@ int main()
 	/*
 	CSmartPtr<int> ptr1(new int);
 
-	// data¶Ñ heap¶Ñ stack¶Ñ
+	// dataå † heapå † stackå †
 	int* p = new int(10);
 	*p = 10;
 	delete p;
 	*/
 
 	/* 
-	²»´øÒıÓÃ¼ÆÊıµÄÖÇÄÜÖ¸Õë
-	auto_ptr:C++¿âÀïÃæ
-	C++11ĞÂ±ê×¼:
+	ä¸å¸¦å¼•ç”¨è®¡æ•°çš„æ™ºèƒ½æŒ‡é’ˆ
+	auto_ptr:C++åº“é‡Œé¢
+	C++11æ–°æ ‡å‡†:
 	scoped_ptr
 	scoped_ptr(const scoped_ptr<T>&) = delete;
 	scoped_ptr<T>& operator=(const scoped_ptr<T>&) = delete;
 
-	ÍÆ¼öÊ¹ÓÃ£º
+	æ¨èä½¿ç”¨ï¼š
 	unique_ptr
 	unique_ptr(const unique_ptr<T>&) = delete;
 	unique_ptr<T>& operator=(const unique_ptr<T>&) = delete;
 
 
 
-	ÔõÃ´½â¾öÇ³¿½±´µÄÎÊÌâ£¡£¡£¡
+	æ€ä¹ˆè§£å†³æµ…æ‹·è´çš„é—®é¢˜ï¼ï¼ï¼
 
 	//CSmartPtr<int> p1(new int);
 	//CSmartPtr<int> p2(p1);
@@ -59,9 +59,9 @@ int main()
 	*ptr2 = 20;
 	cout << *ptr1 << endl;
 
-	²»ÍÆ¼öÊ¹ÓÃauto_ptr,vector<auto_ptr<int>> vec1;vec2(vec1);
+	ä¸æ¨èä½¿ç”¨auto_ptr,vector<auto_ptr<int>> vec1;vec2(vec1);
 
-	std::move => C++11 ÓÒÖµÒıÓÃ std::moveµÃµ½µ±Ç°±äÁ¿µÄÓÒÖµÀàĞÍ
+	std::move => C++11 å³å€¼å¼•ç”¨ std::moveå¾—åˆ°å½“å‰å˜é‡çš„å³å€¼ç±»å‹
 	*/
 
 	unique_ptr<int> p1(new int);
